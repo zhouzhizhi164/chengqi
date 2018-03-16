@@ -1,7 +1,7 @@
 class Circle extends React.Component{
   render(){
     return(
-    <button className="circle" id={this.props.id}>
+    <button className={this.props.className} onClick={()=>this.props.onClick()}>
       {this.props.value}
     </button>
     );
@@ -9,26 +9,49 @@ class Circle extends React.Component{
 }
 
 class Board extends React.Component{
-  renderCircle(i){
-    var idname="circle"+i;
-    return <Circle id={idname} value={i}/>;
+  constructor(props){
+    super(props);
+    this.state={
+      circles:Array(24).fill(null),
+      xIsNext:true,
+    };
+  }
+  handleClick(i){
+    const circles=this.state.circles.slice();
+    // if(calculateWinner(circles)||circles[i]){
+    //   return;
+    // }
+    circles[i]=this.state.xIsNext?'X':'O';
+    this.setState({
+      circles:circles,
+      xIsNext:!this.state.xIsNext,
+    });
+  }
+  renderCircle(i,j){
+    var i=i+j*8;
+    var className="circle"+" "+"circle"+i;
+    return (<Circle
+      className={className}
+      value={this.state.circles[i]}
+      onClick={()=>this.handleClick(i)}
+    />);
   }
   render(){
     return(
-      <div className="board" id={this.props.id}>
-        <div className="row1">
-          {this.renderCircle(0)}
-          {this.renderCircle(1)}
-          {this.renderCircle(2)}
+      <div className={this.props.className}>
+        <div className="row">
+          {this.renderCircle(0,this.props.j)}
+          {this.renderCircle(1,this.props.j)}
+          {this.renderCircle(2,this.props.j)}
         </div>
-        <div className="row2">
-          {this.renderCircle(3)}
-          {this.renderCircle(4)}
+        <div className="row">
+          {this.renderCircle(3,this.props.j)}
+          {this.renderCircle(4,this.props.j)}
         </div>
-        <div className="row3">
-          {this.renderCircle(5)}
-          {this.renderCircle(6)}
-          {this.renderCircle(7)}
+        <div className="row">
+          {this.renderCircle(5,this.props.j)}
+          {this.renderCircle(6,this.props.j)}
+          {this.renderCircle(7,this.props.j)}
         </div>
       </div>
     );
@@ -36,16 +59,16 @@ class Board extends React.Component{
 }
 
 class Boards extends React.Component{
-  renderBoard(i){
-    var idname="board"+i;
-    return <Board id={idname}/>;
+  renderBoard(j){
+    var className="border"+" "+"board"+j;
+    return <Board className={className} j={j}/>;
   }
   render(){
     return (
       <div id="boards">
         {this.renderBoard(0)}
-        {/* {this.renderBoard(1)}
-        {this.renderBoard(2)} */}
+        {this.renderBoard(1)}
+        {this.renderBoard(2)}
       </div>
     );
   }
