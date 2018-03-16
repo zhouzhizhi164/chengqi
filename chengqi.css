@@ -1,0 +1,58 @@
+body{
+  margin:0px;
+}
+#chengqi-box{
+ margin:100px;
+ position: relative;
+}
+svg{
+  margin:0px;
+  padding:0px;
+}
+
+.circle{
+  border: solid 3px red;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+}
+
+#board0{
+
+  position: absolute;
+  top:0;
+  border: 1px solid red;
+}
+
+#circle0{
+  top: -15px;
+  left: -15px;
+}
+#circle1{
+  top: -15px;
+  left: 115px;
+}
+#circle2{
+  top: -15px;
+  left: 245px;
+}
+#circle3{
+  top: 115px;
+  left: -15px;
+}
+#circle4{
+  top: 115px;
+  left: 245px;
+}
+#circle5{
+  top: 245px;
+  left: -15px;
+}
+#circle6{
+  top: 245px;
+  left: 115px;
+}
+#circle7{
+  top: 245px;
+  left: 245px;
+}
