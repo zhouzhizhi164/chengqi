@@ -116,6 +116,12 @@ function calculateWinner(circles){
     [4,12,20],
     [1,9,17],
     [6,14,22],
+    [0,3,5],
+    [2,4,7],
+    [8,11,13],
+    [10,12,15],
+    [16,19,21],
+    [18,20,23],
   ];
   for(let i=0;i<lines.length;i++){
     const[a,b,c]=lines[i];
