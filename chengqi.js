@@ -16,7 +16,7 @@ class Board extends React.Component{
       value={this.props.circles[i]}
       onClick={()=>this.props.onClick(i)}
     />
-);
+  );
   }
   render(){
     return(
@@ -41,6 +41,27 @@ class Board extends React.Component{
 }
 
 class Boards extends React.Component{
+  renderBoard(j){
+    var className="border"+" "+"board"+j;
+    return <Board
+      className={className}
+      j={j}
+      onClick={(i)=>this.props.onClick(i)}
+      circles={this.props.circles}
+    />;
+  }
+  render(){
+    return (
+      <div id="boards">
+        {this.renderBoard(0)}
+        {this.renderBoard(1)}
+        {this.renderBoard(2)}
+      </div>
+    );
+  }
+}
+
+class Game extends React.Component{
   constructor(props){
     super(props);
     this.state={
@@ -69,33 +90,30 @@ handleClick(i){
   );
 
 }
-
-  renderBoard(j){
+  render(){
     const history=this.state.history;
     const current = history[history.length-1];
-    var className="border"+" "+"board"+j;
-    return <Board
-      className={className}
-      j={j}
-      onClick={(i) => this.handleClick(i)}
-      circles={current.circles}
-    />;
-  }
-  render(){
-    return (
-      <div id="boards">
-        {this.renderBoard(0)}
-        {this.renderBoard(1)}
-        {this.renderBoard(2)}
-      </div>
-    );
-  }
-}
-
-class Game extends React.Component{
-  render(){
+    const winner = calculateWinner(current.circles);
+    let status;
+    if(winner){
+      status="Winner: "+winner;
+    }
+    else{
+      status="Next player: "+(this.state.xIsNext?'X':'O');
+    }
     return(
-      <Boards />
+      <div className="game">
+        <div className="game-boards">
+          <Boards
+            onClick={(i) => this.handleClick(i)}
+            circles={current.circles}
+          />
+        </div>
+        <div className="game-info">
+          <div className="game-status">{status}</div>
+          <ol>{/* TODO */}</ol>
+        </div>
+      </div>
     );
   }
 }

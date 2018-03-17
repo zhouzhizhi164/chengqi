@@ -1,10 +1,12 @@
 body{
   margin:0px;
 }
+
 #chengqi-box{
  margin:100px;
  position: relative;
 }
+
 svg{
   margin:1px;
   padding:0px;
@@ -27,7 +29,6 @@ svg{
   justify-content:space-between;
   height: 0px;
 }
-
 
 .border{
   position: absolute;
@@ -52,4 +53,9 @@ svg{
   left: 150px;
   width: 130px;
   height:100px;
+}
+
+.game-status{
+  position: absolute;
+  top:-50;
 }
